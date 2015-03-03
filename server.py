@@ -81,7 +81,6 @@ def update(entity):
     for k, v in data.iteritems():
         myWorld.update(entity, k,v)
     '''update the entities via this interface'''
-    print(myWorld.get(entity))
     return json.dumps(myWorld.get(entity))
     
 
@@ -93,8 +92,6 @@ def world():
 @app.route("/entity/<entity>")    
 def get_entity(entity):
     '''This is the GET version of the entity interface, return a representation of the entity'''
-    print("in get")
-    print(myWorld.get(entity))
     return json.dumps(myWorld.get(entity))
 
 @app.route("/clear", methods=['POST','GET'])
