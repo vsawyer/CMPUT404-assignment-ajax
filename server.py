@@ -57,8 +57,7 @@ class World:
 # you can test your webservice from the commandline
 # curl -v   -H "Content-Type: appication/json" -X PUT http://127.0.0.1:5000/entity/X -d '{"x":1,"y":1}' 
 
-myWorld = World()          
-
+myWorld = World()       
 # I give this to you, this is how you get the raw body/data portion of a post in flask
 # this should come with flask but whatever, it's not my project.
 def flask_post_json():
@@ -81,9 +80,10 @@ def update(entity):
     data = flask_post_json()
     for k, v in data.iteritems():
         myWorld.update(entity, k,v)
-    
     '''update the entities via this interface'''
+    print(myWorld.get(entity))
     return json.dumps(myWorld.get(entity))
+    
 
 @app.route("/world", methods=['POST','GET'])    
 def world():
@@ -93,6 +93,8 @@ def world():
 @app.route("/entity/<entity>")    
 def get_entity(entity):
     '''This is the GET version of the entity interface, return a representation of the entity'''
+    print("in get")
+    print(myWorld.get(entity))
     return json.dumps(myWorld.get(entity))
 
 @app.route("/clear", methods=['POST','GET'])
